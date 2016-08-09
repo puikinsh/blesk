@@ -1,0 +1,19 @@
+/*
+Theme Name: Blesk
+Theme URI: https://colorlib.com/wp/themes/blesk/
+Author: Colorlib
+Author URI: https://www.colorlib.com/
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Description: Bleks is a clean blog theme, perfectly fit for a small magazine. It features a beautiful featured posts carousel, fully widgetized home page as well as color controls. Check it out!
+Tags: two-columns, three-columns, one-column, featured-images, translation-ready, red
+Text Domain: blesk
+Version: 1.0.0
+*/
+@import url("assets/css/main.css");
+
+.bypostauthor {}
+.sticky {}
+.screen-reader-text {}
+.gallery-caption {}
+.bypostauthor {}
