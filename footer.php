@@ -114,10 +114,10 @@
 						echo '<div class="center"'.$center_box_position.'>';
 
 							//Display logo
-							echo '<a href="'.esc_url(home_url('/')).'" class="logo" title="'.get_bloginfo('name').'" alt="'.get_bloginfo('description').'">';
+							echo '<a href="'.esc_url(home_url('/')).'" class="logo" title="'.esc_attr(get_bloginfo('name')).'" alt="'.esc_attr(get_bloginfo('description')).'">';
 
-							if($logo) {
-								echo '<img src="'.esc_url($logo).'" alt="logo" />';
+							if( has_custom_logo() ) {
+								the_custom_logo();
 							} else {
 								echo '<h1>'.get_bloginfo('name').'</h1><h2>'.get_bloginfo('description').'</h2>';
 							}
@@ -125,7 +125,7 @@
 							echo '</a>';
 
 							//Display description
-							if(get_bloginfo('description')) {
+							if( get_bloginfo('description') && has_custom_logo() ) {
 								echo '<p>'.wp_kses_post(get_bloginfo('description')).'</p>';
 							}
 
@@ -134,22 +134,22 @@
 							echo '<ul class="social">';
 
 								if($link_facebook)
-									echo '<li><a href="'.esc_url($link_facebook).'" title="'.get_bloginfo('name'). ' ' . __('on Facebook', 'blesk').'" class="fa fa-facebook"></a></li>';
+									echo '<li><a href="'.esc_url($link_facebook).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Facebook', 'blesk').'" class="fa fa-facebook"></a></li>';
 
 								if($link_twitter)
-									echo '<li><a href="'.esc_url($link_twitter).'" title="'.get_bloginfo('name'). ' ' . __('on Twitter', 'blesk').'" class="fa fa-twitter"></a></li>';
+									echo '<li><a href="'.esc_url($link_twitter).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Twitter', 'blesk').'" class="fa fa-twitter"></a></li>';
 
 								if($link_youtube)
-									echo '<li><a href="'.esc_url($link_youtube).'" title="'.get_bloginfo('name'). ' ' . __('on YouTube', 'blesk').'" class="fa fa-youtube-play"></a></li>';
+									echo '<li><a href="'.esc_url($link_youtube).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on YouTube', 'blesk').'" class="fa fa-youtube-play"></a></li>';
 
 								if($link_tumblr)
-									echo '<li><a href="'.esc_url($link_tumblr).'" title="'.get_bloginfo('name'). ' ' . __('on Tumblr', 'blesk').'" class="fa fa-tumblr"></a></li>';
+									echo '<li><a href="'.esc_url($link_tumblr).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Tumblr', 'blesk').'" class="fa fa-tumblr"></a></li>';
 
 								if($link_pinterest)
-									echo '<li><a href="'.esc_url($link_pinterest).'" title="'.get_bloginfo('name'). ' ' . __('on Pinterest', 'blesk').'" class="fa fa-pinterest-p"></a></li>';
+									echo '<li><a href="'.esc_url($link_pinterest).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Pinterest', 'blesk').'" class="fa fa-pinterest-p"></a></li>';
 
 								if($link_dribbble)
-									echo '<li><a href="'.esc_url($link_dribbble).'" title="'.get_bloginfo('name'). ' ' . __('on Dribbble', 'blesk').'" class="fa fa-dribbble"></a></li>';
+									echo '<li><a href="'.esc_url($link_dribbble).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Dribbble', 'blesk').'" class="fa fa-dribbble"></a></li>';
 
 							echo '</ul><!-- /.social -->';
 						}
@@ -165,7 +165,7 @@
 			<div class="bottom-footer">
 				<div class="wrapper cf">
 					<span class="copyright">
-						<?php _e('Copyright', 'blesk'); ?> &#169; <?php echo date('Y'); ?>, <?php bloginfo('name'); ?>. <?php _e('All Rights Reserved', 'blesk'); ?>.</span>
+						<?php _e('Copyright', 'blesk'); ?> &#169; <?php echo date_i18n('Y'); ?>, <?php bloginfo('name'); ?>. <?php _e('All Rights Reserved', 'blesk'); ?>.</span>
 				</div><!-- /.wrapper -->
 			</div><!-- /.bottom-footer -->
 		</footer>

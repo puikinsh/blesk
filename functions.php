@@ -7,10 +7,6 @@ include 'includes/libs/class-tgm-plugin-activation.php';
 include 'includes/sanitize.php';
 include 'includes/customizer/customizer.php';
 include 'includes/metaboxes.php';
-
-/** 
- * Widgets
- */
 include 'includes/widgets/latest_news.php';
 include 'includes/widgets/posts_from_category.php';
 
@@ -22,24 +18,22 @@ include 'includes/widgets/posts_from_category.php';
 if(!function_exists('blesk_theme_setup')) {
 	function blesk_theme_setup() {
 
-			//Theme Support
-		add_theme_support( 'title-tag' );
-		add_theme_support( 'post-thumbnails' );
-		add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption') );
-            add_theme_support( 'automatic-feed-links' );
+	//Theme Support
+	add_theme_support( 'title-tag' );
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption') );
+      add_theme_support( 'automatic-feed-links' );
 
-        if(blesk_check_wp_version('4.5')) {
-            add_image_size( 'blesk-logo', 276, 83 );
-            add_theme_support( 'custom-logo', array( 'size' => 'blesk-logo' ) );
-        }
+      add_image_size( 'blesk-logo', 276, 83 );
+      add_theme_support( 'custom-logo', array( 'size' => 'blesk-logo' ) );
 
-			//Register navigation menu
-		register_nav_menus( array(
-			'top_menu' => esc_html__( 'Top Header Menu', 'blesk' ),
-			'header_menu' => esc_html__( 'Main Menu', 'blesk' ),
-			'footer_menu_left' => esc_html__( 'Footer Left Menu', 'blesk' ),
-			'footer_menu_right' => esc_html__( 'Footer Right Menu', 'blesk' )
-		) );
+	//Register navigation menu
+	register_nav_menus( array(
+		'top_menu' => esc_html__( 'Top Header Menu', 'blesk' ),
+		'header_menu' => esc_html__( 'Main Menu', 'blesk' ),
+		'footer_menu_left' => esc_html__( 'Footer Left Menu', 'blesk' ),
+		'footer_menu_right' => esc_html__( 'Footer Right Menu', 'blesk' )
+	) );
 
 			//Image sizes
         add_image_size( 'home_category', 550, 550 );
@@ -49,10 +43,54 @@ if(!function_exists('blesk_theme_setup')) {
 			$content_width = 759;
 		}
 
+      if ( is_admin() ) {
+
+            global $blesk_required_actions;
+
+            /*
+             * id - unique id; required
+             * title
+             * description
+             * check - check for plugins (if installed)
+             * plugin_slug - the plugin's slug (used for installing the plugin)
+             *
+             */
+            $blesk_required_actions = array(
+                  array(
+                        "id"          => 'blesk-req-ac-install-blesk-companion',
+                        "title"       => esc_html__( 'Install Blesk Companion', 'blesk' ),
+                        "description" => esc_html__( '', 'blesk' ),
+                        "check"       => defined( "BLESK_COMPANION" ),
+                        "plugin_slug" => 'blesk-companion',
+                  ),
+                  array(
+                        "id"          => 'blesk-req-ac-frontpage-latest-news',
+                        "title"       => esc_html__( 'Set Static Homepage', 'blesk' ),
+                        "description" => esc_html__( 'If you just installed blesk, create a page with "Home" template and then you need to go to Settings -> Reading , Front page displays and select "Static Page".', 'blesk' ),
+                        "check"       => blesk_is_not_frontpage(),
+                  ),
+                  array(
+                        "id"          => 'blesk-req-ac-install-jetpack',
+                        "title"       => esc_html__( 'Install Jetpack', 'blesk' ),
+                        "description" => esc_html__( 'Blesk works perfectly with Jetpack', 'blesk' ),
+                        "check"       => defined( "JETPACK__MINIMUM_WP_VERSION" ),
+                        "plugin_slug" => 'jetpack',
+                  ),
+
+            );
+
+            require get_template_directory() . '/includes/admin/welcome-screen/welcome-screen.php';
+      }
+
 	}
 	add_action( 'after_setup_theme', 'blesk_theme_setup' );
 }
 
+function blesk_is_not_frontpage() {
+
+      return ( 'page' == get_option( 'show_on_front' ) ? true : false );
+
+}
 
 /**
  * Add theme stylesheets
@@ -66,12 +104,14 @@ if(!function_exists('blesk_styles')) {
 
 		$google_fonts_raleway = array('family'	=> 'Raleway:300');
 
-		wp_enqueue_style( 'main-style', get_stylesheet_uri() );
-		wp_enqueue_style( 'font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', array('main-style'), '4.5.0');
+		
+		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/assets/css/font-awesome.min.css', array(), '4.5.0');
 		wp_enqueue_style( 'owl-css',  get_template_directory_uri() . '/assets/css/owl.carousel.css', array(), '1.3.3');
 		wp_enqueue_style( 'owl-css-theme',  get_template_directory_uri() . '/assets/css/owl.theme.css', array('owl-css'), '1.3.3');
 		wp_enqueue_style( 'google-fonts-roboto', add_query_arg( $google_fonts_roboto, 'https://fonts.googleapis.com/css' ), array(), null );
 		wp_enqueue_style( 'google-fonts-raleway', add_query_arg( $google_fonts_raleway, 'https://fonts.googleapis.com/css' ), array(), null );
+            wp_enqueue_style( 'blesk-theme-style', get_template_directory_uri() . '/assets/css/main.css', array(), '1.0.3');
+            wp_enqueue_style( 'blesk-main-style', get_stylesheet_uri() );
 	
         if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
             wp_enqueue_script( 'comment-reply' );
@@ -88,27 +128,14 @@ if(!function_exists('blesk_styles')) {
  */
 if(!function_exists('blesk_scripts')) {
 	function blesk_scripts() {
-		wp_enqueue_script( 'scripts', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), '1.0', true );
+
+            wp_enqueue_script( 'blesk-html5shiv',get_template_directory_uri().'/assets/js/html5shiv.js');
+            wp_script_add_data( 'blesk-html5shiv', 'conditional', 'lt IE 9' );
+
+		wp_enqueue_script( 'blesk-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/assets/js/owl.carousel.min.js', array(), '1.3.3', true );
 	}
 	add_action( 'wp_enqueue_scripts', 'blesk_scripts' );
-}
-
-
-/**
- * Add HTML5shiv
- *
- * @return string - HTML
- */
-if(!function_exists('blesk_html5shiv')) {
-	function blesk_html5shiv () {
-	    echo '
-	    	<!--[if lt IE 9]>
-	    		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	    	<![endif]-->
-	    	';
-	}
-	add_action( 'wp_head', 'blesk_html5shiv' );
 }
 
 
@@ -807,17 +834,14 @@ if(!function_exists('blesk_get_fontawesome_icons')) {
 if(!function_exists('blesk_home_sections')) {
     function blesk_home_sections() {
 
-        $array = array();
+      $array = array(
+            '01featured_posts' => __('Featured posts','blesk'),
+            '02wide_banner' => __('Wide banner','blesk'),
+            '03content_and_sidebar' => __('Content and sidebar','blesk'),
+            '04bottom_categories' => __('Bottom categories','blesk'),
+      );
 
-        $dir = get_template_directory() . "/parts/homepage/*";
-
-        foreach(glob($dir) as $file) {
-            if(!is_dir($file)) { 
-                $array[substr(basename($file), 0, strpos(basename($file), "."))] = ucfirst(str_replace('_', ' ', substr(substr(basename($file), 0, strpos(basename($file), ".")), 2)));
-            }
-        }
-
-        return $array;
+      return $array;
     }
 }
 
@@ -897,7 +921,7 @@ if(!function_exists('blesk_tgm_activation')) {
  */
 if(!function_exists('blesk_customizer_style_css')) {
     
-    add_action('wp_footer','blesk_customizer_style_css');
+    add_action('wp_enqueue_scripts','blesk_customizer_style_css');
     function blesk_customizer_style_css() {
         /*
             array(
@@ -1112,7 +1136,8 @@ if(!function_exists('blesk_customizer_style_css')) {
             $return .=  '</style>';
         }
 
-        echo $return;
+        wp_add_inline_style( 'blesk-theme-style', $return );
         
     }
 }
+

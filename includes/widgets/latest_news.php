@@ -4,22 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; 
 }
 
-/**
- * Widget API: Custom_Widget_Recent_Posts class
- *
- * @package WordPress
- * @subpackage Widgets
- * @since 4.4.0
- */
-
-/**
- * Core class used to implement a Recent Posts widget.
- *
- * @since 2.8.0
- *
- * @see WP_Widget
- */
-class Custom_Widget_Recent_Posts extends WP_Widget {
+class Blesk_Custom_Widget_Recent_Posts extends WP_Widget {
 
 	/**
 	 * Sets up a new Recent Posts widget instance.
@@ -30,8 +15,8 @@ class Custom_Widget_Recent_Posts extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'customRecentPosts', // Base ID
-			__( '[Blesk] Custom Recent Posts', 'revivewp' ), // Name
-			array( 'description' => __( 'Custom recent posts with featured images', 'revivewp' ), ) // Args
+			__( '[Blesk] Custom Recent Posts', 'blesk' ), // Name
+			array( 'description' => __( 'Custom recent posts with featured images', 'blesk' ), ) // Args
 		);
 	}
 	/**
@@ -49,7 +34,7 @@ class Custom_Widget_Recent_Posts extends WP_Widget {
 			$args['widget_id'] = $this->id;
 		}
 
-		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Posts', 'blesk' );
+		$title = ( ! empty( $instance['title'] ) ) ? sanitize_text_field($instance['title']) : __( 'Recent Posts', 'blesk' );
 
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
@@ -137,7 +122,7 @@ class Custom_Widget_Recent_Posts extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
-		$instance['number'] = (int) $new_instance['number'];
+		$instance['number'] = absint($new_instance['number']);
 		return $instance;
 	}
 
@@ -150,18 +135,18 @@ class Custom_Widget_Recent_Posts extends WP_Widget {
 	 * @param array $instance Current settings.
 	 */
 	public function form( $instance ) {
-		$title     = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
+		$title     = isset( $instance['title'] ) ? sanitize_text_field( $instance['title'] ) : '';
 		$number    = isset( $instance['number'] ) ? absint( $instance['number'] ) : 5;
 ?>
 		<p><label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php _e( 'Title:', 'blesk' ); ?></label>
-		<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
+		<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
 		<p><label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"><?php _e( 'Number of posts to show:', 'blesk' ); ?></label>
-		<input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>" type="number" step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3" /></p>
+		<input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>" type="number" step="1" min="1" value="<?php echo $number; ?>" size="3" /></p>
 
 <?php
 	}
 }
 add_action( 'widgets_init', function(){
-     register_widget( 'Custom_Widget_Recent_Posts' );
+     register_widget( 'Blesk_Custom_Widget_Recent_Posts' );
 });

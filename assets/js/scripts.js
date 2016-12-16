@@ -15,7 +15,7 @@ jQuery( document ).ready( function($) {
 	var breakPoint = 1025;
 
 	// Open menu
-	function openMenu() {
+	function blesk_openMenu() {
 		$( ".bottom-header .open-menu .open" ).click( function() {
 			$( ".bottom-header .menunav" ).addClass( "show-menu" );
 			$( this ).hide();
@@ -29,22 +29,22 @@ jQuery( document ).ready( function($) {
 		});
 	};
 
-	function openSearchBar() {
+	function blesk_openSearchBar() {
 		$( ".open-search" ).click( function() {
 			$( this ).hide();
-			$( ".close-search" ).show();
-			$( ".search-input" ).addClass( "show" );
+			$( this ).parent().find( ".close-search" ).show();
+			$( this ).parent().find( ".search-input" ).addClass( "show" );
 		});
 
 		$( ".close-search" ).click( function() {
 			$( this ).hide();
-			$( ".open-search" ).show();
-			$( ".search-input" ).removeClass( "show" );
+			$( this ).parent().find( ".open-search" ).show();
+			$( this ).parent().find( ".search-input" ).removeClass( "show" );
 		});
 	};
 
 	// Color pink article-preview's title
-	function hoverTitle( a, b ) {
+	function blesk_hoverTitle( a, b ) {
 		$( a ).each( function() {
 			$( this ).on({
 			    mouseenter: function () {
@@ -56,10 +56,10 @@ jQuery( document ).ready( function($) {
 			});
 		})
 	}
-	openMenu();
-	openSearchBar();
-	hoverTitle( ".main-content .post .entry-image", ".entry-content .entry-title a" );
-	hoverTitle( ".main-content .sidebar .widget .post .entry-image", ".read-more" );
-	hoverTitle( ".other-articles .post .entry-image", ".entry-title a" );
-	hoverTitle( ".bottom-header .search .search-input input[type='submit']", ".search-btn" );
+	blesk_openMenu();
+	blesk_openSearchBar();
+	blesk_hoverTitle( ".main-content .post .entry-image", ".entry-content .entry-title a" );
+	blesk_hoverTitle( ".main-content .sidebar .widget .post .entry-image", ".read-more" );
+	blesk_hoverTitle( ".other-articles .post .entry-image", ".entry-title a" );
+	blesk_hoverTitle( ".bottom-header .search .search-input input[type='submit']", ".search-btn" );
 });

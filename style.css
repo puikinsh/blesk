@@ -6,14 +6,40 @@ Author URI: https://www.colorlib.com/
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Description: Bleks is a clean blog theme, perfectly fit for a small magazine. It features a beautiful featured posts carousel, fully widgetized home page as well as color controls. Check it out!
-Tags: two-columns, three-columns, one-column, featured-images, translation-ready, red
+Tags: blog, grid-layout, entertainment
 Text Domain: blesk
-Version: 1.0.0
+Version: 1.0.6
 */
-@import url("assets/css/main.css");
 
 .bypostauthor {}
 .sticky {}
 .screen-reader-text {}
 .gallery-caption {}
 .bypostauthor {}
+
+.bottom-header .menu li a,
+.bottom-header .menu li a:hover {
+	color: #fff;
+}
+.bottom-header .menunav .menu>li {
+	position: relative;
+}
+.bottom-header .menunav ul li ul {
+	background-color: transparent;
+}
+.bottom-header .menunav ul li ul li {
+	background-color: rgba( 220, 8, 68, .9 );
+}
+.bottom-header .menunav .menu > li a {
+	padding-left: 22.5px;
+	padding-right: 22.5px;
+}
+.bottom-header .menunav .menu > li:first-child a {
+	padding-left: 0;
+}
+#blesk-search i {
+	display: none;
+}
+.bottom-header #blesk-search i {
+	display: block;
+}

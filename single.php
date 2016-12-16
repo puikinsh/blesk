@@ -59,7 +59,7 @@
 						<a href="#comments">'.sprintf( _nx( 'One Comment', '%1$s Comments', get_comments_number(), 'comments title', 'blesk' ), number_format_i18n( get_comments_number() ) )	.'</a>
 					</li>
 					<li>
-						<time datetime="'.get_the_date('Y-j-m').'">'.get_the_date('F j, Y').'</time>
+						<time datetime="'.get_the_date('Y-j-m').'">'.get_the_date().'</time>
 					</li>
 				</ul>
 			</div><!-- /.entry-meta -->';

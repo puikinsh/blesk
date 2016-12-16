@@ -50,9 +50,10 @@
 			<nav class="pagination">';
 
 		//Navigation
-		echo paginate_links(array(
+		the_posts_pagination(array(
 				'prev_text' => '<i class="fa fa-angle-left"></i>',
-				'next_text' => '<i class="fa fa-angle-right"></i>'
+				'next_text' => '<i class="fa fa-angle-right"></i>',
+				'screen_reader_text' => ' '
 			));
 
 		echo '</nav><!-- /.pagination -->

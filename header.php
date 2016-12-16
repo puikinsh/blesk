@@ -54,22 +54,22 @@
 							echo '<div class="social"><ul>';
 
 								if($link_facebook)
-									echo '<li><a href="'.esc_url($link_facebook).'" title="'.get_bloginfo('name'). ' ' . __('on Facebook', 'blesk').'" class="fa fa-facebook"></a></li>';
+									echo '<li><a href="'.esc_url($link_facebook).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Facebook', 'blesk').'" class="fa fa-facebook"></a></li>';
 
 								if($link_twitter)
-									echo '<li><a href="'.esc_url($link_twitter).'" title="'.get_bloginfo('name'). ' ' . __('on Twitter', 'blesk').'" class="fa fa-twitter"></a></li>';
+									echo '<li><a href="'.esc_url($link_twitter).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Twitter', 'blesk').'" class="fa fa-twitter"></a></li>';
 
 								if($link_youtube)
-									echo '<li><a href="'.esc_url($link_youtube).'" title="'.get_bloginfo('name'). ' ' . __('on YouTube', 'blesk').'" class="fa fa-youtube"></a></li>';
+									echo '<li><a href="'.esc_url($link_youtube).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on YouTube', 'blesk').'" class="fa fa-youtube"></a></li>';
 
 								if($link_tumblr)
-									echo '<li><a href="'.esc_url($link_tumblr).'" title="'.get_bloginfo('name'). ' ' . __('on Tumblr', 'blesk').'" class="fa fa-tumblr"></a></li>';
+									echo '<li><a href="'.esc_url($link_tumblr).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Tumblr', 'blesk').'" class="fa fa-tumblr"></a></li>';
 
 								if($link_pinterest)
-									echo '<li><a href="'.esc_url($link_pinterest).'" title="'.get_bloginfo('name'). ' ' . __('on Pinterest', 'blesk').'" class="fa fa-pinterest-p"></a></li>';
+									echo '<li><a href="'.esc_url($link_pinterest).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Pinterest', 'blesk').'" class="fa fa-pinterest-p"></a></li>';
 
 								if($link_dribbble)
-									echo '<li><a href="'.esc_url($link_dribbble).'" title="'.get_bloginfo('name'). ' ' . __('on Dribbble', 'blesk').'" class="fa fa-dribbble"></a></li>';
+									echo '<li><a href="'.esc_url($link_dribbble).'" title="'.esc_attr(get_bloginfo('name')). ' ' . __('on Dribbble', 'blesk').'" class="fa fa-dribbble"></a></li>';
 
 							echo '</ul></div><!-- /.social -->';
 						}
@@ -86,28 +86,16 @@
 					<?php
 
 					//Display logo
-					if(blesk_check_wp_version('4.5')) {
-						if(has_custom_logo()) {
-							the_site_logo();
-						}
-					} else {
-						echo '<a href="'.esc_url(home_url('/')).'" class="site-logo-link" title="'.get_bloginfo('name').'" alt="'.get_bloginfo('description').'">';
-						
-						$logo = get_theme_mod('blesk_logo', get_stylesheet_directory_uri().'/assets/img/logo.png');
-						
-						if($logo) {
-							echo '<img src="'.esc_url($logo).'" alt="logo" />';
-						} else {
-							echo '<h1>'.get_bloginfo('name').'</h1><h2>'.get_bloginfo('description').'</h2>';
-						}
-
-						echo '</a>';
-
+					if ( has_custom_logo() ) {
+						the_custom_logo();
+					}else{
+						$format = '<h1><a href="%s">%s</a></h1><h2><a href="%s">%s</a></h2>';
+						printf( $format, esc_url(site_url()), get_bloginfo('name'), esc_url(site_url()), esc_attr(get_bloginfo('description')) );
 					}
 
 					//Display Header AD
 					if($header_ad) {
-						echo '<div class="ads-panel">'.$header_ad.'</div><!-- /.ad-panel -->';
+						echo '<div class="ads-panel">'.wp_kses_post($header_ad).'</div><!-- /.ad-panel -->';
 					}
 
 					?>
@@ -133,17 +121,7 @@
 					}
 					
 					?>
-					<div class="search">
-						<i class="open-search fa fa-search"></i>
-						<i class="close-search fa fa-times"></i>
-						<div class="search-input">
-							<form action="<?php echo esc_url( home_url( '/' ) ); ?>">
-								<input type="search" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'blesk' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
-								<input type="submit" value="" />
-								<i class="search-btn fa fa-search"></i>
-							</form>
-						</div><!-- /.search-input -->
-					</div><!-- /.search -->
+					<?php get_search_form(); ?>
 				</div><!-- /.wrapper -->
 			</div><!-- /.bottom-header -->
 		</header>

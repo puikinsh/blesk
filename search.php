@@ -8,7 +8,7 @@
 
 	//Page title
 	echo '<h1 class="page-title">';
-	printf( __( 'Search Results for: %s', 'blesk' ), esc_html( get_search_query()));
+	printf( __( 'Search Results for: %s', 'blesk' ), get_search_query());
 	echo '</h1>';
 
 	//Do the markup portion
@@ -52,9 +52,10 @@
 			<nav class="pagination">';
 
 		//Navigation
-		echo paginate_links(array(
+		the_posts_pagination(array(
 				'prev_text' => '<i class="fa fa-angle-left"></i>',
-				'next_text' => '<i class="fa fa-angle-right"></i>'
+				'next_text' => '<i class="fa fa-angle-right"></i>',
+				'screen_reader_text' => ' '
 			));
 
 		echo '</nav><!-- /.pagination -->

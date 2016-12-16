@@ -1,0 +1,259 @@
+.blesk-nav-tabs {
+    margin-bottom: 0;
+}
+.blesk-nav-tabs:after {
+    clear: both;
+    display: table;
+    content: " ";
+}
+.blesk-nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+    display: block;
+}
+.blesk-nav-tabs > li > a {
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    display: block;
+    padding: 10px 15px;
+	text-decoration: none;
+}
+.blesk-nav-tabs > li.active > a, .blesk-nav-tabs > li.active > a:focus, .blesk-nav-tabs > li.active > a:hover {
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+.blesk-nav-tabs > li.blesk-w-red-tab > a {
+    color: red;
+    font-weight: bold;
+}
+.blesk-tab-content {
+	background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    width: 960px;
+    float: left;
+}
+.blesk-tab-content > .tab-pane {
+    display: none;
+}
+.blesk-tab-content > .active {
+    display: block;
+}
+
+.blesk-tab-pane {
+	padding: 30px;
+}
+.blesk-tab-pane {
+    display: none;
+}
+.blesk-tab-pane.active {
+    display: block;
+}
+
+#blesk-theme-version {
+    font-size: 50%;
+    padding: 10px;
+    background: #ccc;
+}
+#blesk-w-screenshot {
+    border: 1px solid #ccc;
+    margin-top: 30px;
+}
+.blesk-w-activated {
+    cursor:not-allowed !important;
+}
+.blesk-tab-pane-half {
+    width: 45%;
+    float:left;
+    border-left: 1px solid #ccc;
+    padding-left: 20px;
+    margin-top: 15px;
+    padding-right: 20px;
+    margin-bottom: 15px;
+}
+.blesk-tab-content img {
+    max-width: 100%;
+}
+.blesk-tab-pane-first-half {
+    border-left: none;
+}
+.blesk-tab-pane-center {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.blesk-welcome-title {
+    font-size: 32px;
+}
+.blesk-clear {
+    clear: both;
+}
+.blesk-child-theme-container {
+    position: relative;
+}
+.blesk-child-theme-description {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 0;
+    max-width: 100%;
+    height: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    -webkit-transition: all 300ms ease-out;
+    -moz-transition: all 300ms ease-out;
+    -ms-transition: all 300ms ease-out;
+    -o-transition: all 300ms ease-out;
+    transition: all 300ms ease-out;
+    -webkit-transition-delay: 500ms;
+    -moz-transition-delay: 500ms;
+    -ms-transition-delay: 500ms;
+    -o-transition-delay: 500ms;
+    transition-delay: 500ms;
+}
+
+.blesk-child-theme-image-container {
+    position: relative;
+    overflow: hidden;
+}
+.blesk-child-theme-image-container img {
+    max-width: 100%;
+}
+.blesk-child-theme-details .theme-details {
+    padding: 10px;
+    background: none repeat scroll 0 0 #F1F1F1;
+    font-size: 18px;
+}
+
+.blesk-child-theme-details .theme-details.active {
+    background: none repeat scroll 0 0 #2B5F87;
+    color: #fff;
+}
+
+.blesk-child-theme-details .theme-details .theme-name {
+    float:left;
+}
+.blesk-child-theme-details .theme-details .preview {
+    margin-right: 2px;
+}
+.blesk-fre-pro table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.blesk-fre-pro table tr {
+    border-bottom: 1px solid #ddd;
+}
+.blesk-fre-pro table td {
+    padding: 30px;
+}
+.blesk-fre-pro table th {
+    padding-bottom: 30px;
+}
+.blesk-fre-pro table td span.dashicons-before:before {
+    font-size: 50px;
+    width: auto;
+    height: auto;
+}
+.blesk-fre-pro table td span.dashicons-yes:before {
+    color:green;
+}
+.blesk-fre-pro table td span.dashicons-no-alt:before {
+    color:red;
+}
+.blesk-fre-pro table tr.blesk-text-center {
+    text-align: center;
+}
+.blesk-actions-count {
+    padding: 0 6px;
+    display: inline-block;
+    background-color: #d54e21;
+    color: #fff;
+    font-size: 9px;
+    line-height: 17px;
+    font-weight: 600;
+    margin: 1px 0 0 2px;
+    vertical-align: top;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    z-index: 26;
+}
+.blesk-action-required-box {
+    position: relative;
+}
+.blesk-dismiss-required-action {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    background-color: #D24A4A;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+}
+.blesk-dismiss-required-action:hover {
+    background-color: #CC8C8C;
+}
+
+#github.blesk-tab-pane {
+  text-align: center;
+}
+
+#github.blesk-tab-pane .blesk-tab-pane-half {
+  min-height: 160px;
+}
+
+#github.blesk-tab-pane .translate-button, #github .github-button {
+  margin-top: 20px;
+}
+
+#github.blesk-tab-pane .dashicons {
+  color: #0073aa;
+  font-size: 12px;
+  width: auto;
+}
+
+#github.blesk-tab-pane h4 {
+  margin:10px;;
+}
+
+#github.blesk-tab-pane p.review-link {
+  margin:0;
+}
+
+#github.blesk-tab-pane .blesk-tab-pane-half hr {
+  display: none;
+}
+
+/*Breakpoints*/
+
+@media (max-width: 1200px) {
+  .blesk-tab-content {
+    width: 98%;
+  }
+  .blesk-tab-pane-half {
+    width: 43%;
+  }
+}
+@media (max-width: 782px) {
+  #github.blesk-tab-pane .blesk-tab-pane-half hr {
+    display:block;
+  }
+
+  .blesk-tab-pane-half {
+    width: auto;
+    float: none;
+    border-left: none;
+  }
+  .blesk-welcome-title, .blesk-tab-content h1 {
+    line-height: 30px;
+  }
+  .blesk-fre-pro table td {
+    padding: 30px 10px;
+  }
+}

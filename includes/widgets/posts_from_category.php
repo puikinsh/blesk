@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; 
 }
 
-class CategoryPosts extends WP_Widget {
+class Blesk_CategoryPosts extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress.
@@ -28,8 +28,8 @@ class CategoryPosts extends WP_Widget {
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
-		$title = ( !empty( $instance['title'] ) ? esc_html( $instance['title'] ) : '' );
-		$count = ( !empty( $instance['count'] ) ? esc_html( $instance['count'] ) : '5' );
+		$title = ( !empty( $instance['title'] ) ? sanitize_text_field( $instance['title'] ) : '' );
+		$count = ( !empty( $instance['count'] ) ? absint( $instance['count'] ) : '5' );
 		$icon = ( !empty( $instance['icon'] ) ? esc_html( $instance['icon'] ) : '' );
 		$category = ( !empty( $instance['category'] ) ? esc_html( $instance['category'] ) : '' );
 
@@ -123,9 +123,9 @@ class CategoryPosts extends WP_Widget {
 
 
 		$title = ! empty( $instance['title'] ) ? sanitize_text_field( $instance['title'] ) : '';
-		$count = ! empty( $instance['count'] ) ? sanitize_text_field( $instance['count'] ) : '5';
-		$icon = ! empty( $instance['icon'] ) ? sanitize_text_field( $instance['icon'] ) : '';
-		$category = ! empty( $instance['category'] ) ? sanitize_text_field( $instance['category'] ) : '';
+		$count = ! empty( $instance['count'] ) ? absint( $instance['count'] ) : '5';
+		$icon = ! empty( $instance['icon'] ) ? blesk_sanitize_icon_select( $instance['icon'] ) : '';
+		$category = ! empty( $instance['category'] ) ? blesk_sanitize_category_select( $instance['category'] ) : '';
 
 		echo '
 		<p>
@@ -174,10 +174,10 @@ class CategoryPosts extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-        $instance['count'] = ( !empty( $new_instance['count'] ) ) ? strip_tags( $new_instance['count'] ) : '5';
-        $instance['icon'] = ( !empty( $new_instance['icon'] ) ) ? strip_tags( $new_instance['icon'] ) : '';
-        $instance['category'] = ( !empty( $new_instance['category'] ) ) ? strip_tags( $new_instance['category'] ) : '';
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? sanitize_text_field( $new_instance['title'] ) : '';
+        $instance['count'] = ( !empty( $new_instance['count'] ) ) ? absint( $new_instance['count'] ) : '5';
+        $instance['icon'] = ( !empty( $new_instance['icon'] ) ) ? blesk_sanitize_icon_select( $new_instance['icon'] ) : '';
+        $instance['category'] = ( !empty( $new_instance['category'] ) ) ? blesk_sanitize_category_select( $new_instance['category'] ) : '';
 
 		return $instance;
 	}
@@ -185,5 +185,5 @@ class CategoryPosts extends WP_Widget {
 } // class CategoryPosts
 
 add_action( 'widgets_init', function(){
-     register_widget( 'CategoryPosts' );
+     register_widget( 'Blesk_CategoryPosts' );
 });

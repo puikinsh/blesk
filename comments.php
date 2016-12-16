@@ -7,7 +7,7 @@ if ( post_password_required() )
 	<?php 
 
 	if(get_comments_number() >= 1) {
-		echo '<h2>'.sprintf( _nx( 'One comment', '%1$s comments', get_comments_number(), 'comments title', 'rohas' ), number_format_i18n( get_comments_number() )) .'</h2>';
+		echo '<h2>'.sprintf( _nx( 'One comment', '%1$s comments', get_comments_number(), 'comments title', 'blesk' ), number_format_i18n( get_comments_number() )) .'</h2>';
 		
 	}
 
