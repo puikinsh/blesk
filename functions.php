@@ -481,8 +481,6 @@ if(!function_exists('blesk_get_fontawesome_icons')) {
             'fa-glass' => 'fa-glass',
             'fa-globe' => 'fa-globe',
             'fa-google' => 'fa-google',
-            'fa-google-plus' => 'fa-google-plus',
-            'fa-google-plus-square' => 'fa-google-plus-square',
             'fa-google-wallet' => 'fa-google-wallet',
             'fa-graduation-cap' => 'fa-graduation-cap',
             'fa-gratipay' => 'fa-gratipay',
